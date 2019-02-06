@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ArduinoLight:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ArduinoLight/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ArduinoLight" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="javax.websocket-api-1.1" />
+          <element id="library" level="project" name="httpclient-4.5.7" />
+          <element id="library" level="project" name="commons-codec-1.11" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
