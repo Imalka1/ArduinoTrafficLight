@@ -14,31 +14,38 @@ public class SonicSensor extends HttpServlet {
 
     private boolean isOn;
     private int count;
+    private int distanceConst = 30;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String distance = req.getParameter("distance");
 //        System.out.println(req.getParameter("mac"));
-        try {
-            if (Integer.parseInt(distance) < 30) {
-                if (!isOn) {
-                    sendGetToLights("ON");
-                    System.out.println("LED=ON");
-                    isOn = true;
+        if (distance.equals("getDistance")) {
+            resp.setContentType("text/plain");
+            PrintWriter out = resp.getWriter();
+            out.println(distanceConst + "");
+        } else {
+            try {
+                if (Integer.parseInt(distance) < distanceConst) {
+                    if (!isOn) {
+                        sendGetToLights("ON");
+                        System.out.println("LED=ON");
+                        isOn = true;
+                    }
+                } else {
+                    if (isOn) {
+                        sendGetToLights("OFF");
+                        System.out.println("LED=OFF");
+                        isOn = false;
+                    }
                 }
-            } else {
-                if (isOn) {
-                    sendGetToLights("OFF");
-                    System.out.println("LED=OFF");
-                    isOn = false;
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            count++;
+            distance = distance + "&" + count + "&" + isOn;
+            broadcast(distance);
         }
-        count++;
-        distance = distance + "&" + count + "&" + isOn;
-        broadcast(distance);
     }
 
     private void sendGetToLights(String stat) throws Exception {
