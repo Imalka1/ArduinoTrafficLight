@@ -15,18 +15,20 @@ public class SonicSensor extends HttpServlet {
     private boolean isOn;
     private int count;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String txt = request.getReader().readLine();
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String distance = req.getParameter("distance");
+//        System.out.println(req.getParameter("mac"));
         try {
-            if (Integer.parseInt(txt.trim()) < 30) {
+            if (Integer.parseInt(distance) < 30) {
                 if (!isOn) {
-                    sendPost("ON");
+                    sendGetToLights("ON");
                     System.out.println("LED=ON");
                     isOn = true;
                 }
             } else {
                 if (isOn) {
-                    sendPost("OFF");
+                    sendGetToLights("OFF");
                     System.out.println("LED=OFF");
                     isOn = false;
                 }
@@ -35,11 +37,11 @@ public class SonicSensor extends HttpServlet {
             e.printStackTrace();
         }
         count++;
-        txt = txt + "&" + count + "&" + isOn;
-        broadcast(txt);
+        distance = distance + "&" + count + "&" + isOn;
+        broadcast(distance);
     }
 
-    private void sendPost(String stat) throws Exception {
+    private void sendGetToLights(String stat) throws Exception {
         String lightUrl = "";
         if (stat.equals("ON")) {
             lightUrl = "http://192.168.9.7/led_on";
@@ -60,6 +62,17 @@ public class SonicSensor extends HttpServlet {
         Set<Session> userSessions = ServerEndPoint.getUserSessions();
         for (Session session : userSessions) {
             session.getAsyncRemote().sendText(msg);
+        }
+    }
+
+    private String getPlaceViaMac(String mac) {
+        switch (mac) {
+            case "80:7D:3A:7F:F4:27":
+                return "Galle1";
+            case "80:7D:3A:7F:F3:77":
+                return "Galle2";
+            default:
+                return "";
         }
     }
 }

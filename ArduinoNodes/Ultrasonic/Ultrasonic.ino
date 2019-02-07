@@ -22,13 +22,12 @@ void setup() {
 void loop() {
   if (WiFi.status() == WL_CONNECTED) { //Check WiFi connection status
     HTTPClient http;    //Declare object of class HTTPClient
-    http.begin("http://192.168.9.4:8080/sonicDistance");      //Specify request destination
-    http.addHeader("Content-Type", "application/x-www-form-urlencoded");  //Specify content-type header
-    String postData = String(sonic());
-    int httpCode = http.POST(postData); //Send the request
-    String payload = http.getString();                  //Get the response payload
-    Serial.println(httpCode);   //Print HTTP return code
-    Serial.println(payload);    //Print request response payload
+    http.begin("http://192.168.9.4:8080/sonicDistance?distance=" + String(sonic()) + "&mac=" + WiFi.macAddress()); //Specify request destination
+    int httpCode = http.GET();                                                                  //Send the request
+    if (httpCode > 0) { //Check the returning code
+      String payload = http.getString();   //Get the request response payload
+      Serial.println(payload);                     //Print the response payload
+    }
     http.end();  //Close connection
   } else {
     Serial.println("Error in WiFi connection");
