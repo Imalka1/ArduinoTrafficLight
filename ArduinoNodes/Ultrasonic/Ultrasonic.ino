@@ -21,7 +21,7 @@ void setup() {
 
   if (WiFi.status() == WL_CONNECTED) { //Check WiFi connection status
     HTTPClient http;    //Declare object of class HTTPClient
-    http.begin("http://192.168.9.4:8080/sonicDistance?position=getDistance"); //Specify request destination
+    http.begin("http://192.168.9.4:8080/sonicDistance?distance=getDistance"); //Specify request destination
     int httpCode = http.GET(); //Send the request
     if (httpCode > 0) { //Check the returning code
       distance = http.getString().toInt();   //Get the request response payload
@@ -37,16 +37,16 @@ void loop() {
   tempDistance = sonic();
   if (tempDistance < distance && distance > 0) {
     if (!isOn) {
-      sendRequest(1);
+      sendRequest(tempDistance);
       isOn = true;
     }
   } else {
     if (isOn) {
-      sendRequest(0);
+      sendRequest(tempDistance);
       isOn = false;
     }
   }
-  delay(100);  //Send a request every 30 seconds
+  delay(10);  //Send a request every 30 seconds
 }
 
 int sonic() {
@@ -62,10 +62,10 @@ int sonic() {
   return tempDistance;
 }
 
-void sendRequest(int val) {
+void sendRequest(int tempDistance) {
   if (WiFi.status() == WL_CONNECTED) { //Check WiFi connection status
     HTTPClient http;    //Declare object of class HTTPClient
-    http.begin("http://192.168.9.4:8080/sonicDistance?position=" + String(val) + "&mac=" + WiFi.macAddress()); //Specify request destination
+    http.begin("http://192.168.9.4:8080/sonicDistance?distance=" + String(tempDistance) + "&mac=" + WiFi.macAddress()); //Specify request destination
     int httpCode = http.GET(); //Send the request
     if (httpCode > 0) { //Check the returning code
       String payload = http.getString();   //Get the request response payload
