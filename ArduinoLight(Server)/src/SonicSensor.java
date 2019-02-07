@@ -18,33 +18,27 @@ public class SonicSensor extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String distance = req.getParameter("distance");
+        String position = req.getParameter("position");
 //        System.out.println(req.getParameter("mac"));
-        if (distance.equals("getDistance")) {
+        if (position.equals("getDistance")) {
             resp.setContentType("text/plain");
             PrintWriter out = resp.getWriter();
             out.println(distanceConst + "");
         } else {
             try {
-                if (Integer.parseInt(distance) < distanceConst) {
-                    if (!isOn) {
-                        sendGetToLights("ON");
-                        System.out.println("LED=ON");
-                        isOn = true;
-                    }
-                } else {
-                    if (isOn) {
-                        sendGetToLights("OFF");
-                        System.out.println("LED=OFF");
-                        isOn = false;
-                    }
+                if (Integer.parseInt(position) == 1) {
+                    sendGetToLights("ON");
+                    System.out.println("LED=ON");
+                } else if (Integer.parseInt(position) == 0) {
+                    sendGetToLights("OFF");
+                    System.out.println("LED=OFF");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             count++;
-            distance = distance + "&" + count + "&" + isOn;
-            broadcast(distance);
+            position = position + "&" + count + "&" + isOn;
+            broadcast(position);
         }
     }
 
