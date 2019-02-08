@@ -27,7 +27,7 @@ public class SonicSensor extends HttpServlet {
         } else {
             switch (getSensorViaMac(mac)) {
                 case "sensor1":
-                    switchLights(lightController.getIpViaLight("light1"), lightController.getIpViaLight("light0"), countSensor, 0, 1, 0, 1, distance);
+                    switchLights(lightController.getIpViaLight("light1"), lightController.getIpViaLight("light1"), countSensor, 0, 1, 0, 1, distance);
                     break;
                 case "sensor2":
                     switchLights(lightController.getIpViaLight("light2"), lightController.getIpViaLight("light1"), countSensor, 0, 1, 1, 1, distance);
@@ -51,13 +51,12 @@ public class SonicSensor extends HttpServlet {
                     countSensor[pos11][pos12]--;
                 }
                 countSensor[pos21][pos22]++;
-                lightController.sendGetToLights(ip1, 1);
-                System.out.println("LED=ON");
-//                sendGetToLights(ip2, 1);
+//                lightController.sendGetToLights(ip2, 1);
+                System.out.println("LED=ON2");
                 if (countSensor[pos11][pos12] == 0) {
-                    lightController.sendGetToLights(ip1, 0);
+                    lightController.sendGetToLights(ip2, 0);
 //                    distance = distance + "&false";
-                    System.out.println("LED=OFF");
+                    System.out.println("LED=OFF1");
                 }
 
             }
@@ -75,7 +74,7 @@ public class SonicSensor extends HttpServlet {
 
     private String getSensorViaMac(String mac) {
         switch (mac) {
-            case "80:7D:3A:7F:F4:27":
+            case "80:7D:3A:3E:18:AB":
                 return "sensor1";//Galle 1
             case "3C:71:BF:20:08:9D":
                 return "sensor2";//Galle 2

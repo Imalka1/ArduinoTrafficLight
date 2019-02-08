@@ -25,7 +25,7 @@ public class LightController {
             case "light1":
                 return "192.168.9.7";//Galle 1
             case "light2":
-                return "192.168.9.7";//Galle 2
+                return "192.168.9.8";//Galle 2
             default:
                 return null;
         }

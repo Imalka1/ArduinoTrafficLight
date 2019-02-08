@@ -13,10 +13,7 @@ public class ServerEndPoint {
     private static Set<Session> userSessions = Collections.newSetFromMap(new ConcurrentHashMap<Session, Boolean>());
 
     @OnOpen
-    public void onOpen(Session userSession) {
-        userSessions.add(userSession);
-        System.out.println("logged");
-    }
+    public void onOpen(Session userSession) { userSessions.add(userSession); }
 
     @OnClose
     public void onClose(Session userSession) {
@@ -28,8 +25,6 @@ public class ServerEndPoint {
 //        broadcast(message, userSession);
 //        System.out.println(message);
     }
-
-
 
     public static Set<Session> getUserSessions() {
         return userSessions;
