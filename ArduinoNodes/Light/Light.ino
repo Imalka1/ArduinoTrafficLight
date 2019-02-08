@@ -11,6 +11,8 @@ void setup() {
   delay(10);
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, LOW);
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
   // Connect to WiFi network
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
@@ -43,9 +45,11 @@ void loop() {
   // Match the request
   if (request.indexOf("/led_on") != -1)  {
     digitalWrite(ledPin, HIGH);
+    digitalWrite(LED_BUILTIN, LOW);
   }
   if (request.indexOf("/led_off") != -1)  {
     digitalWrite(ledPin, LOW);
+    digitalWrite(LED_BUILTIN, HIGH);
   }
   // Return the response
   client.println("HTTP/1.1 200 OK");
