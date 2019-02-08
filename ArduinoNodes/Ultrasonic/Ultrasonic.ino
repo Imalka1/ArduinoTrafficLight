@@ -18,6 +18,8 @@ void setup() {
   }
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
 
   if (WiFi.status() == WL_CONNECTED) { //Check WiFi connection status
     HTTPClient http;    //Declare object of class HTTPClient
@@ -38,11 +40,13 @@ void loop() {
   if (tempDistance < distance && distance > 0) {
     if (!isOn) {
       sendRequest(tempDistance);
+      digitalWrite(LED_BUILTIN, LOW);
       isOn = true;
     }
   } else {
     if (isOn) {
       sendRequest(tempDistance);
+      digitalWrite(LED_BUILTIN, HIGH);
       isOn = false;
     }
   }
@@ -75,6 +79,6 @@ void sendRequest(int tempDistance) {
   } else {
     Serial.println("Error in WiFi connection");
   }
-  Serial.print("Distance: ");
-  Serial.println(tempDistance);
+//  Serial.print("Distance: ");
+//  Serial.println(tempDistance);
 }
