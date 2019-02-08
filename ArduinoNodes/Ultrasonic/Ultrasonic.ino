@@ -61,7 +61,7 @@ void loop() {
     }
   }
 
-  delay(10);  //Send a request every 30 seconds
+  delay(100);  //Send a request every 30 seconds
 
   tempDistance = sonic2();
   if (tempDistance < distance && distance > 0) {

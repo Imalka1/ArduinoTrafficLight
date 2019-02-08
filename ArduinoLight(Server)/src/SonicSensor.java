@@ -11,7 +11,7 @@ import java.util.Set;
 public class SonicSensor extends HttpServlet {
 
     //    private boolean isOn;
-    private int distanceConst = 15;
+    private int distanceConst = 10;
     private int[][] countSensor = {{1, 0}, {2, 0}, {3, 0}};
     private LightController lightController = new LightController();
 
