@@ -49,19 +49,19 @@ void loop() {
   tempDistance = sonic1();
   if (tempDistance < distance && distance > 0) {
     if (!isOn1) {
-      digitalWrite(LED_BUILTIN, LOW);
       sendRequest(tempDistance);
+      digitalWrite(LED_BUILTIN, LOW);
       isOn1 = true;
     }
   } else {
     if (isOn1) {
-      digitalWrite(LED_BUILTIN, HIGH);
       sendRequest(tempDistance);
+      digitalWrite(LED_BUILTIN, HIGH);
       isOn1 = false;
     }
   }
 
-  delay(100);  //Send a request every 30 seconds
+  delay(10);  //Send a request every 30 seconds
 
   tempDistance = sonic2();
   if (tempDistance < distance && distance > 0) {
@@ -114,7 +114,6 @@ void sendRequest(int tempDistance) {
     int httpCode = http.GET(); //Send the request
     if (httpCode > 0) { //Check the returning code
       String payload = http.getString();   //Get the request response payload
-      Serial.println(payload); //Print the response payload
     }
     http.end();  //Close connection
   } else {
