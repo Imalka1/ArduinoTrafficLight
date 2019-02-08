@@ -7,13 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6df3e2bc-dcb6-4034-8ba5-d61eaa2f0411" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/WEB-INF/classes/SetLightsOff.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/WEB-INF/classes/SetLightsOff.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ArduinoLight/SetLightsOff.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ArduinoLight/SetLightsOff.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LightController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SetLightsOff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SetLightsOff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ArduinoNodes/Light/Light.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../ArduinoNodes/Light/Light.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ArduinoNodes/Ultrasonic/Ultrasonic.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../ArduinoNodes/Ultrasonic/Ultrasonic.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SonicSensor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SonicSensor.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -108,11 +102,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SonicSensor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="79" column="33" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
+            <state relative-caret-position="119">
+              <caret line="22" column="32" lean-forward="true" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -120,7 +114,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LightController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
@@ -169,9 +163,9 @@
         <option value="$PROJECT_DIR$/web/index.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/ServerEndPoint.java" />
-        <option value="$PROJECT_DIR$/src/SonicSensor.java" />
         <option value="$PROJECT_DIR$/src/SetLightsOff.java" />
         <option value="$PROJECT_DIR$/src/LightController.java" />
+        <option value="$PROJECT_DIR$/src/SonicSensor.java" />
       </list>
     </option>
   </component>
@@ -191,7 +185,7 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="1370" />
     <option name="height" value="770" />
   </component>
@@ -235,7 +229,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549647906460" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549648900917" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -353,12 +347,12 @@
       <workItem from="1549374158184" duration="14306000" />
       <workItem from="1549424195446" duration="17221000" />
       <workItem from="1549536014209" duration="10321000" />
-      <workItem from="1549561189043" duration="39377000" />
+      <workItem from="1549561189043" duration="40125000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81225000" />
+    <option name="totallyTimeSpent" value="81973000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -448,16 +442,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SonicSensor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="79" column="33" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SetLightsOff.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -469,6 +453,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SonicSensor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="22" column="32" lean-forward="true" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
