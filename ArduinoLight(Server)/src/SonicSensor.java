@@ -11,7 +11,7 @@ import java.util.Set;
 public class SonicSensor extends HttpServlet {
 
     //    private boolean isOn;
-    private int distanceConst = 10;
+    private int distanceConst = 15;
     private int[][] countSensor = {{1, 0}, {2, 0}, {3, 0}};
     private LightController lightController = new LightController();
 
@@ -49,13 +49,13 @@ public class SonicSensor extends HttpServlet {
                     }
                     if (countSensor[pos11][pos12] == 0) {
                         lightController.sendGetToLights(ip1, 0);
-                        System.out.println("LED=OFF");
+//                        System.out.println("LED=OFF");
                     }
                 }
                 if (ip2 != null) {
                     countSensor[pos21][pos22]++;
                     lightController.sendGetToLights(ip2, 1);
-                    System.out.println("LED=ON");
+//                    System.out.println("LED=ON");
                 }
             }
         } catch (Exception e) {

@@ -49,14 +49,14 @@ void loop() {
   tempDistance = sonic1();
   if (tempDistance < distance && distance > 0) {
     if (!isOn1) {
-      sendRequest(tempDistance);
       digitalWrite(LED_BUILTIN, LOW);
+      sendRequest(tempDistance);
       isOn1 = true;
     }
   } else {
     if (isOn1) {
-      sendRequest(tempDistance);
       digitalWrite(LED_BUILTIN, HIGH);
+      sendRequest(tempDistance);
       isOn1 = false;
     }
   }
@@ -66,14 +66,14 @@ void loop() {
   tempDistance = sonic2();
   if (tempDistance < distance && distance > 0) {
     if (!isOn2) {
-      sendRequest(tempDistance);
       digitalWrite(LED_BUILTIN, LOW);
+      sendRequest(tempDistance);
       isOn2 = true;
     }
   } else {
     if (isOn2) {
-      sendRequest(tempDistance);
       digitalWrite(LED_BUILTIN, HIGH);
+      sendRequest(tempDistance);
       isOn2 = false;
     }
   }
