@@ -5,9 +5,9 @@ public class LightController {
     public void sendGetToLights(String ip, int status) throws Exception {
         String lightUrl = "";
         if (status == 1 && ip != null) {
-            lightUrl = "http://" + ip + "/ledBody?led=led_on";
+            lightUrl = "http://" + ip + "/led_on";
         } else if (status == 0 && ip != null) {
-            lightUrl = "http://" + ip + "/ledBody?led=led_off";
+            lightUrl = "http://" + ip + "/led_off";
         }
 
         URL obj = new URL(lightUrl);

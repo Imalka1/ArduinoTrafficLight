@@ -4,7 +4,7 @@
 const char* ssid = "iDialog 4G - 2";
 const char* password = "149dialoghomewifi";
 const int ledPin = 10;  //D4
-ESP8266WebServer server(80);
+WiFiServer server(80);
 
 void setup() {
   Serial.begin(9600);
@@ -19,9 +19,8 @@ void setup() {
     delay(500);
   }
   Serial.println("WiFi connected");
-  
+
   // Start the server
-  server.on("/ledBody", controlLed);
   server.begin();
   Serial.println("Server started");
   // Print the IP address
@@ -29,16 +28,31 @@ void setup() {
 }
 
 void loop() {
-  server.handleClient();
-}
-
-void controlLed() {
-  if (server.arg("led") == "led_on") {
+  // Check if a client has connected
+  WiFiClient client = server.available();
+  if (!client) {
+    return;
+  }
+  // Wait until the client sends some data
+  while (!client.available()) {
+    delay(1);
+  }
+  // Read the first line of the request
+  String request = client.readStringUntil('\r');
+  Serial.println(client);
+  client.flush();
+  // Match the request
+  if (request.indexOf("/led_on") != -1)  {
     digitalWrite(ledPin, HIGH);
     digitalWrite(LED_BUILTIN, LOW);
-  } else if (server.arg("led") == "led_off") {
+  }
+  if (request.indexOf("/led_off") != -1)  {
     digitalWrite(ledPin, LOW);
     digitalWrite(LED_BUILTIN, HIGH);
   }
-  server.send(200, "text / plain", "OK");
+  // Return the response
+  client.println("HTTP/1.1 200 OK");
+  client.println("Content-Type: text/html");
+  client.println("OK");
+  delay(1);
 }
