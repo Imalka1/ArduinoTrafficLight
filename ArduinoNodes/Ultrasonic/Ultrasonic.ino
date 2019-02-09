@@ -13,6 +13,7 @@ int tempDistance = 0;
 boolean isOn1 = false;
 boolean isOn2 = false;
 int distance = 0;
+int delayTime = 10;
 ESP8266WebServer server(80);
 
 void setup() {
@@ -27,20 +28,9 @@ void setup() {
   pinMode(echoPin2, INPUT); // Sets the echoPin as an Input
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
-  server.on("/sensorBody", setDistance);
+  server.on("/sensorBody", setProperties);
   server.begin();
-
-  if (WiFi.status() == WL_CONNECTED) { //Check WiFi connection status
-    HTTPClient http;    //Declare object of class HTTPClient
-    http.begin("http://192.168.9.4:8080/sonicDistance?distance=getDistance"); //Specify request destination
-    int httpCode = http.GET(); //Send the request
-    if (httpCode > 0) { //Check the returning code
-      distance = http.getString().toInt();   //Get the request response payload
-    }
-    http.end();  //Close connection
-  } else {
-    Serial.println("Error in WiFi connection");
-  }
+  Serial.println("Wifi OK");
 }
 
 void loop() {
@@ -61,24 +51,22 @@ void loop() {
     }
   }
 
-  delay(10);  //Send a request every 30 seconds
+  //  tempDistance = sonic2();
+  //  if (tempDistance < distance && distance > 0) {
+  //    if (!isOn2) {
+  //      digitalWrite(LED_BUILTIN, LOW);
+  //      sendRequest(tempDistance);
+  //      isOn2 = true;
+  //    }
+  //  } else {
+  //    if (isOn2) {
+  //      digitalWrite(LED_BUILTIN, HIGH);
+  //      sendRequest(tempDistance);
+  //      isOn2 = false;
+  //    }
+  //  }
 
-  tempDistance = sonic2();
-  if (tempDistance < distance && distance > 0) {
-    if (!isOn2) {
-      digitalWrite(LED_BUILTIN, LOW);
-      sendRequest(tempDistance);
-      isOn2 = true;
-    }
-  } else {
-    if (isOn2) {
-      digitalWrite(LED_BUILTIN, HIGH);
-      sendRequest(tempDistance);
-      isOn2 = false;
-    }
-  }
-
-  delay(10);  //Send a request every 30 seconds
+  delay(delayTime);
 }
 
 int sonic1() {
@@ -121,6 +109,8 @@ void sendRequest(int tempDistance) {
   }
 }
 
-void setDistance() {
+void setProperties() {
   distance = server.arg("distance").toInt();
+  delayTime = server.arg("delayTime").toInt();
+  server.send(200, "text/plain", "OK");
 }

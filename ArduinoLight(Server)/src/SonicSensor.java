@@ -11,33 +11,27 @@ import java.util.Set;
 public class SonicSensor extends HttpServlet {
 
     //    private boolean isOn;
-    private int distanceConst = 10;
+    private int distanceConst = 20;
     private int[][] countSensor = {{1, 0}, {2, 0}, {3, 0}};
-    private LightController lightController = new LightController();
+    private LightSensorController lightSensorController = new LightSensorController();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String distance = req.getParameter("distance");
         String mac = req.getParameter("mac");
 //        System.out.println(mac);
-        if (distance.equals("getDistance")) {
-            resp.setContentType("text/plain");
-            PrintWriter out = resp.getWriter();
-            out.println(distanceConst + "");
-        } else {
-            switch (getSensorViaMac(mac)) {
-                case "sensor1":
-                    switchLights(lightController.getIpViaLight("light0"), lightController.getIpViaLight("light1"), countSensor, 0, 1, 0, 1, distance);
-                    break;
-                case "sensor2":
-                    switchLights(lightController.getIpViaLight("light1"), lightController.getIpViaLight("light2"), countSensor, 0, 1, 1, 1, distance);
-                    break;
-                case "sensor3":
-                    switchLights(lightController.getIpViaLight("light2"), lightController.getIpViaLight("light3"), countSensor, 1, 1, 2, 1, distance);
-                    break;
-            }
-            broadcast(distance);
+        switch (MacIpTable.getSensorViaMac(mac)) {
+            case "sensor1":
+                switchLights(MacIpTable.getIpOfLight("light0"), MacIpTable.getIpOfLight("light1"), countSensor, 0, 1, 0, 1, distance);
+                break;
+            case "sensor2":
+                switchLights(MacIpTable.getIpOfLight("light1"), MacIpTable.getIpOfLight("light2"), countSensor, 0, 1, 1, 1, distance);
+                break;
+            case "sensor3":
+                switchLights(MacIpTable.getIpOfLight("light2"), MacIpTable.getIpOfLight("light3"), countSensor, 1, 1, 2, 1, distance);
+                break;
         }
+        broadcast(distance);
     }
 
     private void switchLights(String ip1, String ip2, int[][] countSensor, int pos11, int pos12, int pos21, int pos22, String distance) {
@@ -48,13 +42,13 @@ public class SonicSensor extends HttpServlet {
                         countSensor[pos11][pos12]--;
                     }
                     if (countSensor[pos11][pos12] == 0) {
-                        lightController.sendGetToLights(ip1, 0);
+                        lightSensorController.sendGetToLights(ip1, 0);
 //                        System.out.println("LED=OFF");
                     }
                 }
                 if (ip2 != null) {
                     countSensor[pos21][pos22]++;
-                    lightController.sendGetToLights(ip2, 1);
+                    lightSensorController.sendGetToLights(ip2, 1);
 //                    System.out.println("LED=ON");
                 }
             }
@@ -67,19 +61,6 @@ public class SonicSensor extends HttpServlet {
         Set<Session> userSessions = ServerEndPoint.getUserSessions();
         for (Session session : userSessions) {
             session.getAsyncRemote().sendText(msg);
-        }
-    }
-
-    private String getSensorViaMac(String mac) {
-        switch (mac) {
-            case "80:7D:3A:3E:18:AB":
-                return "sensor1";
-            case "3C:71:BF:20:08:9D":
-                return "sensor2";
-            case "80:7D:3A:3E:00:FF":
-                return "sensor3";
-            default:
-                return "";
         }
     }
 }
