@@ -11,7 +11,7 @@ public class SetProperties {
         }
         for (int i = 0; i < 3; i++) {
             try {
-                lightSensorController.setProperties(MacIpTable.getIpOfSensor("sensor" + (i + 1)),30,300);
+                lightSensorController.setProperties(MacIpTable.getIpOfSensor("sensor" + (i + 1)),20,300);
             } catch (Exception e) {
                 e.printStackTrace();
             }
