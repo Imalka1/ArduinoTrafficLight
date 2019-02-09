@@ -11,7 +11,7 @@ import java.util.Set;
 public class SonicSensor extends HttpServlet {
 
     //    private boolean isOn;
-    private int distanceConst = 20;
+    private int distanceConst = MacIpTable.getDistance();
     private int[][] countSensor = {{1, 0}, {2, 0}, {3, 0}};
     private LightSensorController lightSensorController = new LightSensorController();
 
@@ -19,7 +19,7 @@ public class SonicSensor extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String distance = req.getParameter("distance");
         String mac = req.getParameter("mac");
-//        System.out.println(mac);
+        System.out.println(mac);
         switch (MacIpTable.getSensorViaMac(mac)) {
             case "sensor1":
                 switchLights(MacIpTable.getIpOfLight("light0"), MacIpTable.getIpOfLight("light1"), countSensor, 0, 1, 0, 1, distance);
@@ -43,13 +43,13 @@ public class SonicSensor extends HttpServlet {
                     }
                     if (countSensor[pos11][pos12] == 0) {
                         lightSensorController.sendGetToLights(ip1, 0);
-//                        System.out.println("LED=OFF");
+                        System.out.println("LED=OFF");
                     }
                 }
                 if (ip2 != null) {
                     countSensor[pos21][pos22]++;
                     lightSensorController.sendGetToLights(ip2, 1);
-//                    System.out.println("LED=ON");
+                    System.out.println("LED=ON");
                 }
             }
         } catch (Exception e) {

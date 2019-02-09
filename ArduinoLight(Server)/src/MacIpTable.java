@@ -35,4 +35,20 @@ public class MacIpTable {
                 return "";
         }
     }
+
+    public static int getSensorsCount() {
+        return 3;
+    }
+
+    public static int getLightsCount() {
+        return 2;
+    }
+
+    public static int getDistance() {
+        return 25;
+    }
+
+    public static int getDelayTime() {
+        return 250;
+    }
 }
