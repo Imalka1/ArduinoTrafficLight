@@ -10,9 +10,8 @@ import java.util.Set;
 @WebServlet(urlPatterns = "/sonicDistance")
 public class SonicSensor extends HttpServlet {
 
-    //    private boolean isOn;
     private int distanceConst = MacIpTable.getDistance();
-    private int[][] countSensor = {{1, 0}, {2, 0}, {3, 0}};
+    private int[][] countSensor = {{0}, {0}, {0}};
     private LightSensorController lightSensorController = new LightSensorController();
 
     @Override
@@ -20,21 +19,21 @@ public class SonicSensor extends HttpServlet {
         String distance = req.getParameter("distance");
         String mac = req.getParameter("mac");
         System.out.println(mac);
-        switch (MacIpTable.getSensorViaMac(mac)) {
+        String[] sensor = MacIpTable.getSensorViaMac(mac);
+        switch (sensor[1]) {
             case "sensor1":
-                switchLights(MacIpTable.getIpOfLight("light0"), MacIpTable.getIpOfLight("light1"), countSensor, 0, 1, 0, 1, distance);
+                switchLights(MacIpTable.getIpOfLight("light0"), MacIpTable.getIpOfLight("light1"), countSensor, 0, 0, 0, 0, distance, sensor);
                 break;
             case "sensor2":
-                switchLights(MacIpTable.getIpOfLight("light1"), MacIpTable.getIpOfLight("light2"), countSensor, 0, 1, 1, 1, distance);
+                switchLights(MacIpTable.getIpOfLight("light1"), MacIpTable.getIpOfLight("light2"), countSensor, 0, 0, 1, 0, distance, sensor);
                 break;
             case "sensor3":
-                switchLights(MacIpTable.getIpOfLight("light2"), MacIpTable.getIpOfLight("light3"), countSensor, 1, 1, 2, 1, distance);
+                switchLights(MacIpTable.getIpOfLight("light2"), MacIpTable.getIpOfLight("light3"), countSensor, 1, 0, 2, 0, distance, sensor);
                 break;
         }
-        broadcast(distance);
     }
 
-    private void switchLights(String ip1, String ip2, int[][] countSensor, int pos11, int pos12, int pos21, int pos22, String distance) {
+    private void switchLights(String ip1, String ip2, int[][] countSensor, int pos11, int pos12, int pos21, int pos22, String distance, String[] sensor) {
         try {
             if (Integer.parseInt(distance) < distanceConst) {
                 if (ip1 != null) {
@@ -51,6 +50,14 @@ public class SonicSensor extends HttpServlet {
                     lightSensorController.sendGetToLights(ip2, 1);
                     System.out.println("LED=ON");
                 }
+                String message = sensor[1].substring(6);
+                if (Integer.parseInt(message) == 1) {
+                    message += "&" + sensor[0].substring(3) + "&" + countSensor[Integer.parseInt(message) - 1][0] + "&0";
+                } else {
+                    message += "&" + sensor[0].substring(3) + "&" + countSensor[Integer.parseInt(message) - 1][0] + "&" + countSensor[Integer.parseInt(message) - 2][0];
+                }
+//                System.out.println(message);
+                broadcast(message);
             }
         } catch (Exception e) {
             e.printStackTrace();

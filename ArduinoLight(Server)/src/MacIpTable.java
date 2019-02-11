@@ -23,16 +23,16 @@ public class MacIpTable {
         }
     }
 
-    public static String getSensorViaMac(String mac) {
+    public static String[] getSensorViaMac(String mac) {
         switch (mac) {
             case "80:7D:3A:3E:18:AB":
-                return "sensor1";
+                return new String[]{"seg1", "sensor1"};
             case "3C:71:BF:20:08:9D":
-                return "sensor2";
+                return new String[]{"seg1", "sensor2"};
             case "80:7D:3A:3E:00:FF":
-                return "sensor3";
+                return new String[]{"seg1", "sensor3"};
             default:
-                return "";
+                return new String[]{"", ""};
         }
     }
 
