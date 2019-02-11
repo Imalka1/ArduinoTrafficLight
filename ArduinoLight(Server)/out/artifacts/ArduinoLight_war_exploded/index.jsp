@@ -17,11 +17,11 @@
         <div id="txtId" style="text-align: center;margin: auto;font-size: 32px"></div>
     </div>
 </div>
-<div class="row" style="margin-bottom: 10px">
-    <div class="col-12">
-        <div style="text-align: center;margin: auto;font-size: 28px">(LEDs are switched on below 30cm)</div>
-    </div>
-</div>
+<%--<div class="row" style="margin-bottom: 10px">--%>
+    <%--<div class="col-12">--%>
+        <%--<div style="text-align: center;margin: auto;font-size: 28px">(LEDs are switched on below 30cm)</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
 <%--<div class="row" style="margin-top: 100px">--%>
     <%--<div class="col-12">--%>
         <%--<div style="width: 60%;text-align: center;margin: auto;background-color: #f9b94e;color: #635120;padding: 50px;font-size: 28px">--%>

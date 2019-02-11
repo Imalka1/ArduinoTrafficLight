@@ -1,5 +1,5 @@
 var webSoc = new WebSocket("ws://" + window.location.hostname + ":" + window.location.port + "/light-end-point");
-var segments = [["Segment - 1", 2]];
+var segments = [["Galle - Baddegama", 2]];
 
 webSoc.onopen = function (ev) {
     console.log("logged");
@@ -10,15 +10,6 @@ webSoc.onclose = function (ev) {
 }
 
 webSoc.onmessage = function processMessage(message) {
-    // console.log(message)
-    // $("#txtId").html("Ultrasonic Sensor :- Reading (" + message.data.split('&')[1] + ")  =>  " + message.data.split('&')[0] + "cm");
-    // if (message.data.split('&')[2] == "true") {
-    //     $("#lightId").html("Lights are switched ON");
-    //     $("#swCol").css("background-color", "green");
-    // } else if (message.data.split('&')[2] == "false") {
-    //     $("#lightId").html("Lights are switched OFF");
-    //     $("#swCol").css("background-color", "red");
-    // }
     setVehicleCount(message.data.split('&')[0], message.data.split('&')[1], message.data.split('&')[2], message.data.split('&')[3])//Sensor & Segment & Cur_Value & Pre_Value
 }
 
@@ -43,7 +34,7 @@ function setSpots(segmentCount, spotsCount) {
     for (var i = 0; i < spotsCount; i++) {
         spots += '' +
             '<div class="row" style="border: 1px solid black;padding: 5px;margin: 10px">' +
-            '<div class="col-4" style="text-align: center">Spot - ' + (i + 1) + '</div>' +
+            '<div class="col-4" style="text-align: center">Area - ' + (i + 1) + '</div>' +
             '<div class="col-4" id="seg' + segmentCount + 'led' + (i + 1) + '" style="text-align: center;font-weight: bold;color: red">Lights OFF</div>' +
             '<div class="col-4" id="seg' + segmentCount + 'vCount' + (i + 1) + '" style="text-align: center">Vehicle Count - 0</div>' +
             '</div>';
@@ -85,4 +76,18 @@ $(window).ready(function () {
     for (var i = 0; i < segments.length; i++) {
         setSegments((i + 1), segments[i][0], segments[i][1]);
     }
+    $.ajax(
+        {
+            type: "post",
+            url: "http://" + window.location.hostname + ":8080/getProperties",
+            success: function (response) {
+                if (response != null) {
+                    setVehicleCount(response.split('&')[0], response.split('&')[1], response.split('&')[2], response.split('&')[3]);
+                }
+            },
+            error: function () {
+
+            }
+        }
+    );
 });

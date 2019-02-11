@@ -10,7 +10,7 @@ import java.util.Set;
 @WebServlet(urlPatterns = "/sonicDistance")
 public class SonicSensor extends HttpServlet {
 
-    private String message;
+    private static String message;
     private int distanceConst = MacIpTable.getDistance();
     private int[][] countSensor = {{0}, {0}, {0}};
     private LightSensorController lightSensorController = new LightSensorController();
@@ -72,7 +72,11 @@ public class SonicSensor extends HttpServlet {
         }
     }
 
-//    public static void broadcastToSession(Session session) {
+    public static String getMessage() {
+        return message;
+    }
+
+    //    public static void broadcastToSession(Session session) {
 //        session.getAsyncRemote().sendText(message);
 //    }
 }

@@ -15,7 +15,6 @@ public class ServerEndPoint {
     @OnOpen
     public void onOpen(Session userSession) {
         userSessions.add(userSession);
-//        SonicSensor.broadcastToSession(userSession);
     }
 
     @OnClose
