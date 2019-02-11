@@ -1,6 +1,5 @@
 var webSoc = new WebSocket("ws://" + window.location.hostname + ":" + window.location.port + "/light-end-point");
-var segments = ["Segment - 1", "Segment - 2"];
-var spotsCount = [2, 4];
+var segments = [["Segment - 1", 2]];
 
 webSoc.onopen = function (ev) {
     console.log("logged");
@@ -45,7 +44,7 @@ function setSpots(segmentCount, spotsCount) {
         spots += '' +
             '<div class="row" style="border: 1px solid black;padding: 5px;margin: 10px">' +
             '<div class="col-4" style="text-align: center">Spot - ' + (i + 1) + '</div>' +
-            '<div class="col-4" id="seg' + segmentCount + 'led' + (i + 1) + '" style="text-align: center">Lights OFF</div>' +
+            '<div class="col-4" id="seg' + segmentCount + 'led' + (i + 1) + '" style="text-align: center;font-weight: bold;color: red">Lights OFF</div>' +
             '<div class="col-4" id="seg' + segmentCount + 'vCount' + (i + 1) + '" style="text-align: center">Vehicle Count - 0</div>' +
             '</div>';
     }
@@ -57,27 +56,33 @@ function setVehicleCount(val1, val2, val3, val4) {//Sensor & Segment & Cur_Value
         $("#seg" + val2 + "vCount" + val1).html('Vehicle Count - ' + val3);
         if (val3 > 0) {
             $("#seg" + val2 + "led" + val1).html('Lights ON');
+            $("#seg" + val2 + "led" + val1).css("color", "#3EA317");
         } else {
             $("#seg" + val2 + "led" + val1).html('Lights OFF');
+            $("#seg" + val2 + "led" + val1).css("color", "red");
         }
     } else {
         $("#seg" + val2 + "vCount" + (val1 - 1)).html('Vehicle Count - ' + val4);
         $("#seg" + val2 + "vCount" + val1).html('Vehicle Count - ' + val3);
         if (val3 > 0) {
             $("#seg" + val2 + "led" + val1).html('Lights ON');
+            $("#seg" + val2 + "led" + val1).css("color", "#3EA317");
         } else {
             $("#seg" + val2 + "led" + val1).html('Lights OFF');
+            $("#seg" + val2 + "led" + val1).css("color", "red");
         }
         if (val4 > 0) {
-            $("#seg" + val2 + "led" + (val1-1)).html('Lights ON');
+            $("#seg" + val2 + "led" + (val1 - 1)).html('Lights ON');
+            $("#seg" + val2 + "led" + (val1 - 1)).css("color", "#3EA317");
         } else {
-            $("#seg" + val2 + "led" + (val1-1)).html('Lights OFF');
+            $("#seg" + val2 + "led" + (val1 - 1)).html('Lights OFF');
+            $("#seg" + val2 + "led" + (val1 - 1)).css("color", "red");
         }
     }
 }
 
 $(window).ready(function () {
     for (var i = 0; i < segments.length; i++) {
-        setSegments((i + 1), segments[i], spotsCount[i]);
+        setSegments((i + 1), segments[i][0], segments[i][1]);
     }
 });

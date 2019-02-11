@@ -13,7 +13,10 @@ public class ServerEndPoint {
     private static Set<Session> userSessions = Collections.newSetFromMap(new ConcurrentHashMap<Session, Boolean>());
 
     @OnOpen
-    public void onOpen(Session userSession) { userSessions.add(userSession); }
+    public void onOpen(Session userSession) {
+        userSessions.add(userSession);
+//        SonicSensor.broadcastToSession(userSession);
+    }
 
     @OnClose
     public void onClose(Session userSession) {

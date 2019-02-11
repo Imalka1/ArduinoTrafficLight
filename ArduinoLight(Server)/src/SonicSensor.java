@@ -10,6 +10,7 @@ import java.util.Set;
 @WebServlet(urlPatterns = "/sonicDistance")
 public class SonicSensor extends HttpServlet {
 
+    private String message;
     private int distanceConst = MacIpTable.getDistance();
     private int[][] countSensor = {{0}, {0}, {0}};
     private LightSensorController lightSensorController = new LightSensorController();
@@ -18,7 +19,7 @@ public class SonicSensor extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String distance = req.getParameter("distance");
         String mac = req.getParameter("mac");
-        System.out.println(mac);
+//        System.out.println(mac);
         String[] sensor = MacIpTable.getSensorViaMac(mac);
         switch (sensor[1]) {
             case "sensor1":
@@ -50,7 +51,7 @@ public class SonicSensor extends HttpServlet {
                     lightSensorController.sendGetToLights(ip2, 1);
                     System.out.println("LED=ON");
                 }
-                String message = sensor[1].substring(6);
+                message = sensor[1].substring(6);
                 if (Integer.parseInt(message) == 1) {
                     message += "&" + sensor[0].substring(3) + "&" + countSensor[Integer.parseInt(message) - 1][0] + "&0";
                 } else {
@@ -70,4 +71,8 @@ public class SonicSensor extends HttpServlet {
             session.getAsyncRemote().sendText(msg);
         }
     }
+
+//    public static void broadcastToSession(Session session) {
+//        session.getAsyncRemote().sendText(message);
+//    }
 }

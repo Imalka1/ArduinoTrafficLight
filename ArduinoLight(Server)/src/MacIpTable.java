@@ -45,7 +45,7 @@ public class MacIpTable {
     }
 
     public static int getDistance() {
-        return 25;
+        return 28;
     }
 
     public static int getDelayTime() {
