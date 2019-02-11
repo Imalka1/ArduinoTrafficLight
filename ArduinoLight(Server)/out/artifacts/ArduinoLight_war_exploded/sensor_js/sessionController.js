@@ -82,7 +82,11 @@ $(window).ready(function () {
             url: "http://" + window.location.hostname + ":8080/getProperties",
             success: function (response) {
                 if (response != null) {
-                    setVehicleCount(response.split('&')[0], response.split('&')[1], response.split('&')[2], response.split('&')[3]);
+                    console.log(response)
+                    var dataSet = response.split('$');
+                    for (var i = 0; i < dataSet.length; i++) {
+                        setVehicleCount(dataSet[i].split('&')[0], dataSet[i].split('&')[1], dataSet[i].split('&')[2], dataSet[i].split('&')[3]);
+                    }
                 }
             },
             error: function () {

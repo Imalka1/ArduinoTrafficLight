@@ -7,12 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6df3e2bc-dcb6-4034-8ba5-d61eaa2f0411" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/sensor_js/sessionController.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/sensor_js/sessionController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerEndPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerEndPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MacIpTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MacIpTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SonicSensor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SonicSensor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/sensor_js/sessionController.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/sensor_js/sessionController.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -77,8 +73,8 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="29" />
-          <entry key="java" value="1939" />
-          <entry key="js" value="1427" />
+          <entry key="java" value="2138" />
+          <entry key="js" value="1477" />
           <entry key="jsp" value="69" />
           <entry key="xml" value="3" />
         </counts>
@@ -86,16 +82,16 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="34" />
-          <entry key="JAVA" value="1939" />
+          <entry key="JAVA" value="2138" />
           <entry key="JSP" value="69" />
-          <entry key="JavaScript" value="1393" />
+          <entry key="JavaScript" value="1443" />
           <entry key="PLAIN_TEXT" value="29" />
           <entry key="XML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="21" />
+          <entry key="java" value="24" />
           <entry key="js" value="3" />
           <entry key="jsp" value="1" />
           <entry key="xml" value="2" />
@@ -103,7 +99,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="21" />
+          <entry key="JAVA" value="24" />
           <entry key="JSP" value="1" />
           <entry key="JavaScript" value="3" />
           <entry key="XML" value="2" />
@@ -116,17 +112,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
+            <state>
               <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/sensor_js/sessionController.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="218">
-              <caret line="84" column="116" selection-start-line="84" selection-start-column="116" selection-end-line="84" selection-end-column="116" />
+              <caret line="87" column="128" selection-start-line="87" selection-start-column="128" selection-end-line="87" selection-end-column="128" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -141,23 +137,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SonicSensor.java">
+        <entry file="file://$PROJECT_DIR$/src/LoadProperties.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="74" column="39" selection-start-line="74" selection-start-column="39" selection-end-line="74" selection-end-column="39" />
+            <state relative-caret-position="238">
+              <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3324#3325#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/LoadProperties.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/SonicSensor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+            <state relative-caret-position="249">
+              <caret line="78" column="17" selection-start-line="78" selection-start-column="17" selection-end-line="78" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -168,8 +163,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MacIpTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
+            <state relative-caret-position="402">
+              <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+              <folding>
+                <element signature="e#1137#1138#0" expanded="true" />
+                <element signature="e#1161#1162#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -209,11 +208,11 @@
         <option value="$PROJECT_DIR$/src/IpTable.java" />
         <option value="$PROJECT_DIR$/src/SetProperties.java" />
         <option value="$PROJECT_DIR$/web/lightController.js" />
-        <option value="$PROJECT_DIR$/src/MacIpTable.java" />
         <option value="$PROJECT_DIR$/web/index.jsp" />
         <option value="$PROJECT_DIR$/src/ServerEndPoint.java" />
-        <option value="$PROJECT_DIR$/src/SonicSensor.java" />
         <option value="$PROJECT_DIR$/src/LoadProperties.java" />
+        <option value="$PROJECT_DIR$/src/MacIpTable.java" />
+        <option value="$PROJECT_DIR$/src/SonicSensor.java" />
         <option value="$PROJECT_DIR$/web/sensor_js/sessionController.js" />
       </list>
     </option>
@@ -286,7 +285,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549902458188" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549909708023" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -409,18 +408,18 @@
       <workItem from="1549536014209" duration="10321000" />
       <workItem from="1549561189043" duration="103037000" />
       <workItem from="1549900211922" duration="965000" />
-      <workItem from="1549901228351" duration="1194000" />
+      <workItem from="1549901228351" duration="4828000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147044000" />
+    <option name="totallyTimeSpent" value="150678000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16040269" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16040269" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -430,7 +429,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32907802" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26524824" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.26524824" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -483,25 +482,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SetProperties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="36" lean-forward="true" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/sensor_js/lightController.js" />
     <entry file="file://$PROJECT_DIR$/web/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
+        <state>
           <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MacIpTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -517,29 +502,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ServerEndPoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+        <state relative-caret-position="340">
+          <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
           <folding>
+            <element signature="e#516#517#0" expanded="true" />
             <element signature="e#561#562#0" expanded="true" />
+            <element signature="e#891#892#0" expanded="true" />
+            <element signature="e#926#927#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SonicSensor.java">
+    <entry file="file://$PROJECT_DIR$/src/SetProperties.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="74" column="39" selection-start-line="74" selection-start-column="39" selection-end-line="74" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3324#3325#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="15" column="36" lean-forward="true" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LoadProperties.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -549,7 +533,7 @@
     <entry file="file://$PROJECT_DIR$/web/sensor_js/sessionController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="218">
-          <caret line="84" column="116" selection-start-line="84" selection-start-column="116" selection-end-line="84" selection-end-column="116" />
+          <caret line="87" column="128" selection-start-line="87" selection-start-column="128" selection-end-line="87" selection-end-column="128" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -558,6 +542,27 @@
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MacIpTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+          <folding>
+            <element signature="e#1137#1138#0" expanded="true" />
+            <element signature="e#1161#1162#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SonicSensor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="78" column="17" selection-start-line="78" selection-start-column="17" selection-end-line="78" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

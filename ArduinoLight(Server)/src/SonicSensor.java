@@ -10,9 +10,8 @@ import java.util.Set;
 @WebServlet(urlPatterns = "/sonicDistance")
 public class SonicSensor extends HttpServlet {
 
-    private static String message;
     private int distanceConst = MacIpTable.getDistance();
-    private int[][] countSensor = {{0}, {0}, {0}};
+    private static int[] countSensor = {0, 0, 0};
     private LightSensorController lightSensorController = new LightSensorController();
 
     @Override
@@ -23,39 +22,39 @@ public class SonicSensor extends HttpServlet {
         String[] sensor = MacIpTable.getSensorViaMac(mac);
         switch (sensor[1]) {
             case "sensor1":
-                switchLights(MacIpTable.getIpOfLight("light0"), MacIpTable.getIpOfLight("light1"), countSensor, 0, 0, 0, 0, distance, sensor);
+                switchLights(MacIpTable.getIpOfLight("light0"), MacIpTable.getIpOfLight("light1"), countSensor, 0, 0, distance, sensor);
                 break;
             case "sensor2":
-                switchLights(MacIpTable.getIpOfLight("light1"), MacIpTable.getIpOfLight("light2"), countSensor, 0, 0, 1, 0, distance, sensor);
+                switchLights(MacIpTable.getIpOfLight("light1"), MacIpTable.getIpOfLight("light2"), countSensor, 0, 1, distance, sensor);
                 break;
             case "sensor3":
-                switchLights(MacIpTable.getIpOfLight("light2"), MacIpTable.getIpOfLight("light3"), countSensor, 1, 0, 2, 0, distance, sensor);
+                switchLights(MacIpTable.getIpOfLight("light2"), MacIpTable.getIpOfLight("light3"), countSensor, 1, 2, distance, sensor);
                 break;
         }
     }
 
-    private void switchLights(String ip1, String ip2, int[][] countSensor, int pos11, int pos12, int pos21, int pos22, String distance, String[] sensor) {
+    private void switchLights(String ip1, String ip2, int[] countSensor, int pos11, int pos21, String distance, String[] sensor) {
         try {
             if (Integer.parseInt(distance) < distanceConst) {
                 if (ip1 != null) {
-                    if (countSensor[pos11][pos12] > 0) {
-                        countSensor[pos11][pos12]--;
+                    if (countSensor[pos11] > 0) {
+                        countSensor[pos11]--;
                     }
-                    if (countSensor[pos11][pos12] == 0) {
+                    if (countSensor[pos11] == 0) {
                         lightSensorController.sendGetToLights(ip1, 0);
                         System.out.println("LED=OFF");
                     }
                 }
                 if (ip2 != null) {
-                    countSensor[pos21][pos22]++;
+                    countSensor[pos21]++;
                     lightSensorController.sendGetToLights(ip2, 1);
                     System.out.println("LED=ON");
                 }
-                message = sensor[1].substring(6);
+                String message = sensor[1].substring(6);
                 if (Integer.parseInt(message) == 1) {
-                    message += "&" + sensor[0].substring(3) + "&" + countSensor[Integer.parseInt(message) - 1][0] + "&0";
+                    message += "&" + sensor[0].substring(3) + "&" + countSensor[Integer.parseInt(message) - 1] + "&0";
                 } else {
-                    message += "&" + sensor[0].substring(3) + "&" + countSensor[Integer.parseInt(message) - 1][0] + "&" + countSensor[Integer.parseInt(message) - 2][0];
+                    message += "&" + sensor[0].substring(3) + "&" + countSensor[Integer.parseInt(message) - 1] + "&" + countSensor[Integer.parseInt(message) - 2];
                 }
 //                System.out.println(message);
                 broadcast(message);
@@ -73,10 +72,17 @@ public class SonicSensor extends HttpServlet {
     }
 
     public static String getMessage() {
+        String message = "";
+        for (int i = 0; i < MacIpTable.getSegmentSensorsCount().length; i++) {
+            for (int j = 0; j < MacIpTable.getSegmentSensorsCount()[0]; j++) {
+                if ((j + 1) == 1) {
+                    message += (j + 1) + "&" + (i + 1) + "&" + countSensor[j] + "&0";
+                } else {
+                    message += (j + 1) + "&" + (i + 1) + "&" + countSensor[j] + "&" + countSensor[j - 1];
+                }
+                message += "$";
+            }
+        }
         return message;
     }
-
-    //    public static void broadcastToSession(Session session) {
-//        session.getAsyncRemote().sendText(message);
-//    }
 }

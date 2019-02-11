@@ -51,4 +51,8 @@ public class MacIpTable {
     public static int getDelayTime() {
         return 250;
     }
+
+    public static int[] getSegmentSensorsCount() {
+        return new int[]{3};
+    }
 }
