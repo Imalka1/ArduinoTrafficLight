@@ -45,9 +45,9 @@ function setSpots(segmentCount, spotsCount) {
         spots += '' +
             '<div class="row" style="border: 1px solid black;padding: 5px;margin: 10px">' +
             '<div class="col-4" style="text-align: center">Spot - ' + (i + 1) + '</div>' +
-            '<div class="col-4" style="text-align: center">Light</div>' +
+            '<div class="col-4" id="seg' + segmentCount + 'led' + (i + 1) + '" style="text-align: center">Lights OFF</div>' +
             '<div class="col-4" id="seg' + segmentCount + 'vCount' + (i + 1) + '" style="text-align: center">Vehicle Count - 0</div>' +
-            '</div>';console.log('seg' + segmentCount + 'vCount' + (i + 1))
+            '</div>';
     }
     return spots;
 }
@@ -55,9 +55,24 @@ function setSpots(segmentCount, spotsCount) {
 function setVehicleCount(val1, val2, val3, val4) {//Sensor & Segment & Cur_Value & Pre_Value
     if (val1 == 1) {
         $("#seg" + val2 + "vCount" + val1).html('Vehicle Count - ' + val3);
+        if (val3 > 0) {
+            $("#seg" + val2 + "led" + val1).html('Lights ON');
+        } else {
+            $("#seg" + val2 + "led" + val1).html('Lights OFF');
+        }
     } else {
         $("#seg" + val2 + "vCount" + (val1 - 1)).html('Vehicle Count - ' + val4);
         $("#seg" + val2 + "vCount" + val1).html('Vehicle Count - ' + val3);
+        if (val3 > 0) {
+            $("#seg" + val2 + "led" + val1).html('Lights ON');
+        } else {
+            $("#seg" + val2 + "led" + val1).html('Lights OFF');
+        }
+        if (val4 > 0) {
+            $("#seg" + val2 + "led" + (val1-1)).html('Lights ON');
+        } else {
+            $("#seg" + val2 + "led" + (val1-1)).html('Lights OFF');
+        }
     }
 }
 
