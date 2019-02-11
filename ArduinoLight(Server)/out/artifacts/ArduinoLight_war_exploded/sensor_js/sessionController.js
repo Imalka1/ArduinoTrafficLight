@@ -1,6 +1,6 @@
 var webSoc = new WebSocket("ws://" + window.location.hostname + ":" + window.location.port + "/light-end-point");
 var segments = ["Segment - 1", "Segment - 2"];
-var spotsCount = [3, 2];
+var spotsCount = [2, 4];
 
 webSoc.onopen = function (ev) {
     console.log("logged");
@@ -11,7 +11,7 @@ webSoc.onclose = function (ev) {
 }
 
 webSoc.onmessage = function processMessage(message) {
-    console.log(message)
+    // console.log(message)
     // $("#txtId").html("Ultrasonic Sensor :- Reading (" + message.data.split('&')[1] + ")  =>  " + message.data.split('&')[0] + "cm");
     // if (message.data.split('&')[2] == "true") {
     //     $("#lightId").html("Lights are switched ON");
@@ -53,13 +53,11 @@ function setSpots(segmentCount, spotsCount) {
 }
 
 function setVehicleCount(val1, val2, val3, val4) {//Sensor & Segment & Cur_Value & Pre_Value
-    console.log(val2)
     if (val1 == 1) {
         $("#seg" + val2 + "vCount" + val1).html('Vehicle Count - ' + val3);
     } else {
         $("#seg" + val2 + "vCount" + (val1 - 1)).html('Vehicle Count - ' + val4);
         $("#seg" + val2 + "vCount" + val1).html('Vehicle Count - ' + val3);
-        console.log(val3)
     }
 }
 
