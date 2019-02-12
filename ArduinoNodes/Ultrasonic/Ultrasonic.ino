@@ -1,7 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <ESP8266WebServer.h>
-#include <ArduinoJson.h>
 
 const char* ssid = "iDialog 4G - 2";
 const char* password = "149dialoghomewifi";
@@ -32,6 +31,7 @@ void setup() {
   server.on("/sensorBody", setProperties);
   server.begin();
   Serial.println("Wifi OK");
+  sendRequest("http://192.168.9.4:8080/sonicDistance?wifiStatus=OK&mac=" + WiFi.macAddress());
 }
 
 void loop() {
@@ -40,13 +40,13 @@ void loop() {
   tempDistance = sonic1();
   if (tempDistance < distance && distance > 0) {
     if (!isOn1) {
-      sendRequest(tempDistance);
+      sendRequest("http://192.168.9.4:8080/sonicDistance?distance=" + String(tempDistance) + "&mac=" + WiFi.macAddress());
       digitalWrite(LED_BUILTIN, LOW);
       isOn1 = true;
     }
   } else {
     if (isOn1) {
-      sendRequest(tempDistance);
+      sendRequest("http://192.168.9.4:8080/sonicDistance?distance=" + String(tempDistance) + "&mac=" + WiFi.macAddress());
       digitalWrite(LED_BUILTIN, HIGH);
       isOn1 = false;
     }
@@ -96,10 +96,10 @@ int sonic2() {
   return tempDistance;
 }
 
-void sendRequest(int tempDistance) {
+void sendRequest(String url) {
   if (WiFi.status() == WL_CONNECTED) { //Check WiFi connection status
     HTTPClient http;    //Declare object of class HTTPClient
-    http.begin("http://192.168.9.4:8080/sonicDistance?distance=" + String(tempDistance) + "&mac=" + WiFi.macAddress()); //Specify request destination
+    http.begin(url); //Specify request destination
     int httpCode = http.GET(); //Send the request
     if (httpCode > 0) { //Check the returning code
       String payload = http.getString();   //Get the request response payload

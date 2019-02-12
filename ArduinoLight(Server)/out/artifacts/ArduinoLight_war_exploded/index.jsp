@@ -8,7 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/font-awesome/latest/css/font-awesome.min.css">
     <title>$Title$</title>
 </head>
 <body class="">
@@ -35,6 +36,6 @@
 <%--</div>--%>
 <div id="screenBody"></div>
 </body>
-<script src="js/jquery-3.2.1.min.js"></script>
+<script src="assets/js/jquery-3.2.1.min.js"></script>
 <script src="sensor_js/sessionController.js"></script>
 </html>
