@@ -10,7 +10,8 @@ webSoc.onclose = function (ev) {
 }
 
 webSoc.onmessage = function processMessage(message) {
-    setVehicleCount(message.data.split('&')[0], message.data.split('&')[1], message.data.split('&')[2], message.data.split('&')[3])//Sensor & Segment & Cur_Value & Pre_Value
+    var dataSet = JSON.parse(message.data);
+    setVehicleCount(dataSet.sensor, dataSet.segment, dataSet.curCount, dataSet.preCount)//Sensor & Segment & Cur_Value & Pre_Value
 }
 
 function setSegments(i, segment, spots) {
@@ -81,12 +82,10 @@ $(window).ready(function () {
             type: "post",
             url: "http://" + window.location.hostname + ":8080/getProperties",
             success: function (response) {
-                if (response != null) {
-                    console.log(response)
-                    var dataSet = response.split('$');
-                    for (var i = 0; i < dataSet.length; i++) {
-                        setVehicleCount(dataSet[i].split('&')[0], dataSet[i].split('&')[1], dataSet[i].split('&')[2], dataSet[i].split('&')[3]);
-                    }
+                var jsonData  = JSON.parse(response);
+                for (var i = 0; i < jsonData.sensorData.length; i++) {
+                    console.log(jsonData.sensorData[i])
+                    setVehicleCount(jsonData.sensorData[i].sensor, jsonData.sensorData[i].segment, jsonData.sensorData[i].curCount, jsonData.sensorData[i].preCount);//Sensor & Segment & Cur_Value & Pre_Value
                 }
             },
             error: function () {

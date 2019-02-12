@@ -52,9 +52,12 @@ public class SonicSensor extends HttpServlet {
                 }
                 String message = sensor[1].substring(6);
                 if (Integer.parseInt(message) == 1) {
-                    message += "&" + sensor[0].substring(3) + "&" + countSensor[Integer.parseInt(message) - 1] + "&0";
+                    message = "{\"sensor\":\"" + message + "\",\"segment\":\"" + sensor[0].substring(3) + "\",\"curCount\":\"" + countSensor[Integer.parseInt(message) - 1] + "\",\"preCount\":\"0\",\"error\":\"Not found\"}";
+                    System.out.println(message);
                 } else {
-                    message += "&" + sensor[0].substring(3) + "&" + countSensor[Integer.parseInt(message) - 1] + "&" + countSensor[Integer.parseInt(message) - 2];
+                    message = "{\"sensor\":\"" + message + "\",\"segment\":\"" + sensor[0].substring(3) + "\",\"curCount\":\"" + countSensor[Integer.parseInt(message) - 1] + "\",\"preCount\":\"" + countSensor[Integer.parseInt(message) - 2] + "\",\"error\":\"Not found\"}";
+                    System.out.println(message);
+//                    message += "&" + sensor[0].substring(3) + "&" + countSensor[Integer.parseInt(message) - 1] + "&" + countSensor[Integer.parseInt(message) - 2];
                 }
 //                System.out.println(message);
                 broadcast(message);
@@ -72,17 +75,27 @@ public class SonicSensor extends HttpServlet {
     }
 
     public static String getMessage() {
-        String message = "";
+        String message = "{\"sensorData\":[";
         for (int i = 0; i < MacIpTable.getSegmentSensorsCount().length; i++) {
-            for (int j = 0; j < MacIpTable.getSegmentSensorsCount()[0]; j++) {
+//            message += "\"segment\":";
+            for (int j = 0; j < MacIpTable.getSegmentSensorsCount()[0]-1; j++) {
                 if ((j + 1) == 1) {
-                    message += (j + 1) + "&" + (i + 1) + "&" + countSensor[j] + "&0";
+                    message += "{\"sensor\":\"" + (j + 1) + "\",\"segment\":\"" + (i + 1) + "\",\"curCount\":\"" + countSensor[j] + "\",\"preCount\":\"0\",\"error\":\"Not found\"}";
+                    if (j != MacIpTable.getSegmentSensorsCount()[0] - 2) {
+                        message += ",";
+                    }
+//                    message += (j + 1) + "&" + (i + 1) + "&" + countSensor[j] + "&0";
                 } else {
-                    message += (j + 1) + "&" + (i + 1) + "&" + countSensor[j] + "&" + countSensor[j - 1];
+                    message += "{\"sensor\":\"" + (j + 1) + "\",\"segment\":\"" + (i + 1) + "\",\"curCount\":\"" + countSensor[j] + "\",\"preCount\":\"" + countSensor[j - 1] + "\",\"error\":\"Not found\"}";
+                    if (j != MacIpTable.getSegmentSensorsCount()[0] - 2) {
+                        message += ",";
+                    }
+//                    message += (j + 1) + "&" + (i + 1) + "&" + countSensor[j] + "&" + countSensor[j - 1];
                 }
-                message += "$";
             }
+            message += "]}";
         }
+        System.out.println(message);
         return message;
     }
 }
