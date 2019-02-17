@@ -12,7 +12,8 @@ webSoc.onclose = function (ev) {
 
 webSoc.onmessage = function processMessage(message) {
     var dataSet = JSON.parse(message.data);
-    if (dataSet.errorFound == "Not found(OK)") {
+    if (dataSet.errorFound === "Not found(OK)") {
+        console.log(147)
         count++;
         checkWifiSensorModules(dataSet.sensor, dataSet.segment)//Sensor & Segment
         if (count == 3) {
@@ -113,7 +114,7 @@ $(window).ready(function () {
             success: function (response) {
                 var jsonData = JSON.parse(response);
                 for (var i = 0; i < jsonData.sensorData.length; i++) {
-                    console.log(jsonData.sensorData[i])
+                    // console.log(jsonData.sensorData[i])
                     setVehicleCount(jsonData.sensorData[i].sensor, jsonData.sensorData[i].segment, jsonData.sensorData[i].curCount, jsonData.sensorData[i].preCount);//Sensor & Segment & Cur_Value & Pre_Value
                 }
             },

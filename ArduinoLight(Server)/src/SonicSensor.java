@@ -1,3 +1,6 @@
+import components.Sensor;
+import mac_ip.NodemcuTable;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,62 +13,66 @@ import java.util.Set;
 @WebServlet(urlPatterns = "/sonicDistance")
 public class SonicSensor extends HttpServlet {
 
-    private int distanceConst = MacIpTable.getDistance();
-    private static int[] countSensor = {0, 0, 0};
+    private Sensor sensor;
+    private int distanceConst = NodemcuTable.getDistance();
+    //    private static int[] countSensor = {0, 0, 0};
     private LightSensorController lightSensorController = new LightSensorController();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("wifiStatus") != null) {
-            String[] sensor = MacIpTable.getSensorViaMac(req.getParameter("mac"));
-            String message = "{\"sensor\":\"" + sensor[1].substring(6) + "\",\"segment\":\"" + sensor[0].substring(3) + "\",\"errorFound\":\"Not found(OK)\"}";
+            Sensor sensor = NodemcuTable.getSensorViaMac(req.getParameter("mac"));
+            String message = "{\"sensor\":\"" + sensor.getName().substring(6) + "\",\"segment\":\"" + sensor.getSegment().substring(3) + "\",\"errorFound\":\"Not found(OK)\"}";
+            System.out.println(message);
             broadcast(message);
         } else {
             String distance = req.getParameter("distance");
 //            String mac = req.getParameter("mac");
 //        System.out.println(mac);
-            String[] sensor = MacIpTable.getSensorViaMac(req.getParameter("mac"));
-            switch (sensor[1]) {
+            Sensor sensor = NodemcuTable.getSensorViaMac(req.getParameter("mac"));
+            switch (sensor.getName()) {
                 case "sensor1":
-                    switchLights(MacIpTable.getIpOfLight("light0"), MacIpTable.getIpOfLight("light1"), countSensor, 0, 0, distance, sensor);
+                    switchLights(NodemcuTable.getIpOfLight("light0"), NodemcuTable.getIpOfLight("light1"), distance, 0);
                     break;
                 case "sensor2":
-                    switchLights(MacIpTable.getIpOfLight("light1"), MacIpTable.getIpOfLight("light2"), countSensor, 0, 1, distance, sensor);
+                    switchLights(NodemcuTable.getIpOfLight("light1"), NodemcuTable.getIpOfLight("light2"), distance, 1);
                     break;
                 case "sensor3":
-                    switchLights(MacIpTable.getIpOfLight("light2"), MacIpTable.getIpOfLight("light3"), countSensor, 1, 2, distance, sensor);
+                    switchLights(NodemcuTable.getIpOfLight("light2"), NodemcuTable.getIpOfLight("light3"), distance, 2);
                     break;
             }
         }
     }
 
-    private void switchLights(String ip1, String ip2, int[] countSensor, int pos11, int pos21, String distance, String[] sensor) {
+    private void switchLights(String ip1, String ip2, String distance, int position) {
         try {
             if (Integer.parseInt(distance) < distanceConst) {
                 if (ip1 != null) {
-                    if (countSensor[pos11] > 0) {
-                        countSensor[pos11]--;
+                    sensor = NodemcuTable.getSensors().get(position - 1);
+                    if (sensor.getCount() > 0) {
+                        sensor.setCount(sensor.getCount() - 1);
                     }
-                    if (countSensor[pos11] == 0) {
+                    if (sensor.getCount() == 0) {
                         lightSensorController.sendGetToLights(ip1, 0);
                         System.out.println("LED=OFF");
                     }
                 }
                 if (ip2 != null) {
-                    countSensor[pos21]++;
+                    sensor = NodemcuTable.getSensors().get(position);
+                    sensor.setCount(sensor.getCount() + 1);
                     lightSensorController.sendGetToLights(ip2, 1);
                     System.out.println("LED=ON");
                 }
-                String message = sensor[1].substring(6);
+                String message = NodemcuTable.getSensors().get(position).getName().substring(6);
                 if (Integer.parseInt(message) == 1) {
-                    message = "{\"sensor\":\"" + message + "\",\"segment\":\"" + sensor[0].substring(3) + "\",\"curCount\":\"" + countSensor[Integer.parseInt(message) - 1] + "\",\"preCount\":\"0\",\"errorFound\":\"Not found\"}";
-                    System.out.println(message);
+                    message = "{\"sensor\":\"" + message + "\",\"segment\":\"" + sensor.getSegment().substring(3) + "\",\"curCount\":\"" + sensor.getCount() + "\",\"preCount\":\"0\",\"errorFound\":\"Not found\"}";
+//                    System.out.println(message);
                 } else {
-                    message = "{\"sensor\":\"" + message + "\",\"segment\":\"" + sensor[0].substring(3) + "\",\"curCount\":\"" + countSensor[Integer.parseInt(message) - 1] + "\",\"preCount\":\"" + countSensor[Integer.parseInt(message) - 2] + "\",\"errorFound\":\"Not found\"}";
-                    System.out.println(message);
+                    message = "{\"sensor\":\"" + message + "\",\"segment\":\"" + sensor.getSegment().substring(3) + "\",\"curCount\":\"" + sensor.getCount() + "\",\"preCount\":\"" + NodemcuTable.getSensors().get(position - 1).getCount() + "\",\"errorFound\":\"Not found\"}";
+//                    System.out.println(message);
 //                    message += "&" + sensor[0].substring(3) + "&" + countSensor[Integer.parseInt(message) - 1] + "&" + countSensor[Integer.parseInt(message) - 2];
                 }
-//                System.out.println(message);
+                System.out.println(message);
                 broadcast(message);
             }
         } catch (Exception e) {
@@ -82,24 +89,24 @@ public class SonicSensor extends HttpServlet {
 
     public static String getMessage() {
         String message = "{\"sensorData\":[";
-        for (int i = 0; i < MacIpTable.getSegmentSensorsCount().length; i++) {
+        for (int i = 0; i < NodemcuTable.getSegmentSensorsCount().length; i++) {
 //            message += "\"segment\":";
-            for (int j = 0; j < MacIpTable.getSegmentSensorsCount()[0] - 1; j++) {
+            for (int j = 0; j < NodemcuTable.getSegmentSensorsCount()[0] - 1; j++) {
                 if ((j + 1) == 1) {
-                    message += "{\"sensor\":\"" + (j + 1) + "\",\"segment\":\"" + (i + 1) + "\",\"curCount\":\"" + countSensor[j] + "\",\"preCount\":\"0\"}";
-                    if (j != MacIpTable.getSegmentSensorsCount()[0] - 2) {
+                    message += "{\"sensor\":\"" + (j + 1) + "\",\"segment\":\"" + (i + 1) + "\",\"curCount\":\"" + NodemcuTable.getSensors().get(j).getCount() + "\",\"preCount\":\"0\"}";
+                    if (j != NodemcuTable.getSegmentSensorsCount()[0] - 2) {
                         message += ",";
                     }
                 } else {
-                    message += "{\"sensor\":\"" + (j + 1) + "\",\"segment\":\"" + (i + 1) + "\",\"curCount\":\"" + countSensor[j] + "\",\"preCount\":\"" + countSensor[j - 1] + "\"}";
-                    if (j != MacIpTable.getSegmentSensorsCount()[0] - 2) {
+                    message += "{\"sensor\":\"" + (j + 1) + "\",\"segment\":\"" + (i + 1) + "\",\"curCount\":\"" + NodemcuTable.getSensors().get(j).getCount() + "\",\"preCount\":\"" + NodemcuTable.getSensors().get(j - 1).getCount() + "\"}";
+                    if (j != NodemcuTable.getSegmentSensorsCount()[0] - 2) {
                         message += ",";
                     }
                 }
             }
             message += "]}";
         }
-        System.out.println(message);
+//        System.out.println(message);
         return message;
     }
 }

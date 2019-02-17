@@ -1,3 +1,5 @@
+import mac_ip.NodemcuTable;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,16 +17,16 @@ public class SetProperties extends HttpServlet {
     }
 
     public void setProperties() {
-        for (int i = 0; i < MacIpTable.getLightsCount(); i++) {
+        for (int i = 0; i < NodemcuTable.getLightsCount(); i++) {
             try {
-                lightSensorController.sendGetToLights(MacIpTable.getIpOfLight("light" + (i + 1)), 0);
+                lightSensorController.sendGetToLights(NodemcuTable.getIpOfLight("light" + (i + 1)), 0);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        for (int i = 0; i < MacIpTable.getSensorsCount(); i++) {
+        for (int i = 0; i < NodemcuTable.getSensorsCount(); i++) {
             try {
-                lightSensorController.setProperties(MacIpTable.getIpOfSensor("sensor" + (i + 1)), MacIpTable.getDistance(), MacIpTable.getDelayTime());
+                lightSensorController.setProperties(NodemcuTable.getSensors().get(i).getIp(), NodemcuTable.getDistance(), NodemcuTable.getDelayTime());
             } catch (Exception e) {
                 e.printStackTrace();
             }
