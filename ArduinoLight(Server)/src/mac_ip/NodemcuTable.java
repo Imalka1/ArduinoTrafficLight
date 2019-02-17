@@ -9,16 +9,17 @@ public class NodemcuTable {
     private static ArrayList<Sensor> sensors = new ArrayList<>();
 
     public NodemcuTable() {
-        setSensor("sensor1", "seg1", "192.168.9.21");
-        setSensor("sensor2", "seg1", "192.168.9.22");
-        setSensor("sensor3", "seg1", "192.168.9.23");
+        setSensor("sensor1", "seg1", "192.168.9.21", "errorFound");
+        setSensor("sensor2", "seg1", "192.168.9.22", "errorFound");
+        setSensor("sensor3", "seg1", "192.168.9.23", "errorFound");
     }
 
-    private void setSensor(String name, String segment, String ip) {
+    private void setSensor(String name, String segment, String ip, String error) {
         Sensor sensor = new Sensor();
         sensor.setName(name);
         sensor.setSegment(segment);
         sensor.setIp(ip);
+        sensor.setError(error);
         sensors.add(sensor);
     }
 

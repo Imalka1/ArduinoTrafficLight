@@ -5,6 +5,7 @@ import javax.websocket.Session;
 public class Sensor {
     private int index;
     private String name;
+    private String error;
     private int count;
     private Session session;
     private String ip;
@@ -65,5 +66,13 @@ public class Sensor {
 
     public void setSegment(String segment) {
         this.segment = segment;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

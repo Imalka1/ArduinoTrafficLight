@@ -1,3 +1,6 @@
+package socket_controller;
+
+import controller.LightSensorController;
 import mac_ip.NodemcuTable;
 
 import javax.servlet.ServletException;

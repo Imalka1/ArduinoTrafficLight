@@ -1,5 +1,8 @@
+package controller;
+
 import components.Sensor;
 import mac_ip.NodemcuTable;
+import socket_controller.ServerEndPoint;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,8 +25,19 @@ public class SonicSensor extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("wifiStatus") != null) {
             Sensor sensor = NodemcuTable.getSensorViaMac(req.getParameter("mac"));
-            String message = "{\"sensor\":\"" + sensor.getName().substring(6) + "\",\"segment\":\"" + sensor.getSegment().substring(3) + "\",\"errorFound\":\"Not found(OK)\"}";
+            sensor.setError("Not found(OK)");
+            String message = "{\"sensor\":\"" + sensor.getName().substring(6) + "\",\"segment\":\"" + sensor.getSegment().substring(3) + "\",\"errorFound\":\"" + sensor.getError() + "\"}";
             System.out.println(message);
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        Thread.sleep(NodemcuTable.getDelayTime());
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }).start();
             broadcast(message);
         } else {
             String distance = req.getParameter("distance");
@@ -87,25 +101,25 @@ public class SonicSensor extends HttpServlet {
         }
     }
 
-    public static String getMessage() {
+    public static String getVehicleCount() {
         String message = "{\"sensorData\":[";
         for (int i = 0; i < NodemcuTable.getSegmentSensorsCount().length; i++) {
 //            message += "\"segment\":";
-            for (int j = 0; j < NodemcuTable.getSegmentSensorsCount()[0] - 1; j++) {
+            for (int j = 0; j < NodemcuTable.getSegmentSensorsCount()[0]; j++) {
                 if ((j + 1) == 1) {
-                    message += "{\"sensor\":\"" + (j + 1) + "\",\"segment\":\"" + (i + 1) + "\",\"curCount\":\"" + NodemcuTable.getSensors().get(j).getCount() + "\",\"preCount\":\"0\"}";
-                    if (j != NodemcuTable.getSegmentSensorsCount()[0] - 2) {
+                    message += "{\"sensor\":\"" + (j + 1) + "\",\"segment\":\"" + (i + 1) + "\",\"curCount\":\"" + NodemcuTable.getSensors().get(j).getCount() + "\",\"preCount\":\"0\",\"errorFound\":\"" + NodemcuTable.getSensors().get(j).getError() + "\"}";
+                    if (j != NodemcuTable.getSegmentSensorsCount()[0] - 1) {
                         message += ",";
                     }
                 } else {
-                    message += "{\"sensor\":\"" + (j + 1) + "\",\"segment\":\"" + (i + 1) + "\",\"curCount\":\"" + NodemcuTable.getSensors().get(j).getCount() + "\",\"preCount\":\"" + NodemcuTable.getSensors().get(j - 1).getCount() + "\"}";
-                    if (j != NodemcuTable.getSegmentSensorsCount()[0] - 2) {
+                    message += "{\"sensor\":\"" + (j + 1) + "\",\"segment\":\"" + (i + 1) + "\",\"curCount\":\"" + NodemcuTable.getSensors().get(j).getCount() + "\",\"preCount\":\"" + NodemcuTable.getSensors().get(j - 1).getCount() + "\",\"errorFound\":\"" + NodemcuTable.getSensors().get(j).getError() + "\"}";
+                    if (j != NodemcuTable.getSegmentSensorsCount()[0] - 1) {
                         message += ",";
                     }
                 }
             }
-            message += "]}";
         }
+        message += "]}";
 //        System.out.println(message);
         return message;
     }

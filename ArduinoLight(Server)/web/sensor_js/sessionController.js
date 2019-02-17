@@ -13,8 +13,8 @@ webSoc.onclose = function (ev) {
 webSoc.onmessage = function processMessage(message) {
     var dataSet = JSON.parse(message.data);
     if (dataSet.errorFound === "Not found(OK)") {
-        console.log(147)
         count++;
+        console.log(count)
         checkWifiSensorModules(dataSet.sensor, dataSet.segment)//Sensor & Segment
         if (count == 3) {
             $.ajax(
@@ -30,7 +30,7 @@ webSoc.onmessage = function processMessage(message) {
                 }
             );
         }
-    } else {
+    } else if (dataSet.errorFound === "Not found") {
         setVehicleCount(dataSet.sensor, dataSet.segment, dataSet.curCount, dataSet.preCount)//Sensor & Segment & Cur_Value & Pre_Value
     }
 }
@@ -110,11 +110,15 @@ $(window).ready(function () {
     $.ajax(
         {
             type: "post",
-            url: "http://" + window.location.hostname + ":8080/getProperties",
+            url: "http://" + window.location.hostname + ":8080/getVehicleCount",
             success: function (response) {
                 var jsonData = JSON.parse(response);
                 for (var i = 0; i < jsonData.sensorData.length; i++) {
-                    // console.log(jsonData.sensorData[i])
+                    if (jsonData.sensorData[i].errorFound === "Not found(OK)") {
+                        checkWifiSensorModules(jsonData.sensorData[i].sensor, jsonData.sensorData[i].segment)//Sensor & Segment
+                    } else {
+
+                    }
                     setVehicleCount(jsonData.sensorData[i].sensor, jsonData.sensorData[i].segment, jsonData.sensorData[i].curCount, jsonData.sensorData[i].preCount);//Sensor & Segment & Cur_Value & Pre_Value
                 }
             },
@@ -123,4 +127,23 @@ $(window).ready(function () {
             }
         }
     );
+    // $.ajax(
+    //     {
+    //         type: "post",
+    //         url: "http://" + window.location.hostname + ":8080/getWifiStatus",
+    //         success: function (response) {
+    //             var jsonData = JSON.parse(response);
+    //             for (var i = 0; i < jsonData.sensorData.length; i++) {
+    //                 if (jsonData.sensorData[i].errorFound === "Not found(OK)") {
+    //                     checkWifiSensorModules(jsonData.sensorData[i].sensor, jsonData.sensorData[i].segment)//Sensor & Segment
+    //                 } else {
+    //
+    //                 }
+    //             }
+    //         },
+    //         error: function () {
+    //
+    //         }
+    //     }
+    // );
 });
