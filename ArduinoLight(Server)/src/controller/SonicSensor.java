@@ -28,17 +28,17 @@ public class SonicSensor extends HttpServlet {
             sensor.setError("Not found(OK)");
             String message = "{\"sensor\":\"" + sensor.getName().substring(6) + "\",\"segment\":\"" + sensor.getSegment().substring(3) + "\",\"errorFound\":\"" + sensor.getError() + "\"}";
             System.out.println(message);
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        Thread.sleep(NodemcuTable.getDelayTime());
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }).start();
-            broadcast(message);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(NodemcuTable.getDelayTime());
+                        broadcast(message);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
         } else {
             String distance = req.getParameter("distance");
 //            String mac = req.getParameter("mac");
