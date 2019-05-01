@@ -2,8 +2,12 @@
 #include <ESP8266HTTPClient.h>
 #include <ESP8266WebServer.h>
 
-const char* ssid = "iDialog 4G - 2";
-const char* password = "149dialoghomewifi";
+//const char* ssid = "iDialog 4G - 2";
+//const char* password = "149dialoghomewifi";
+//const char* ssid = "PROLiNK_H5001N";
+//const char* password = "prolink123321";
+const char* ssid = "SLT-4G_372144";
+const char* password = "prolink12345";
 const int trigPin1 = 2;  //D4
 const int echoPin1 = 0;  //D3
 const int trigPin2 = 4;  //D2
@@ -31,7 +35,7 @@ void setup() {
   server.on("/sensorBody", setProperties);
   server.begin();
   Serial.println("Wifi OK");
-  sendRequest("http://192.168.9.4:8080/sonicDistance?wifiStatus=OK&mac=" + WiFi.macAddress());
+  sendRequest("http://192.168.1.4:8080/sonicDistance?wifiStatus=OK&mac=" + WiFi.macAddress());
 }
 
 void loop() {
@@ -40,32 +44,32 @@ void loop() {
   tempDistance = sonic1();
   if (tempDistance < distance && distance > 0) {
     if (!isOn1) {
-      sendRequest("http://192.168.9.4:8080/sonicDistance?distance=" + String(tempDistance) + "&mac=" + WiFi.macAddress());
+      sendRequest("http://192.168.1.4:8080/sonicDistance?distance=" + String(tempDistance) + "&mac=" + WiFi.macAddress());
       digitalWrite(LED_BUILTIN, LOW);
       isOn1 = true;
     }
   } else {
     if (isOn1) {
-      sendRequest("http://192.168.9.4:8080/sonicDistance?distance=" + String(tempDistance) + "&mac=" + WiFi.macAddress());
+      sendRequest("http://192.168.1.4:8080/sonicDistance?distance=" + String(tempDistance) + "&mac=" + WiFi.macAddress());
       digitalWrite(LED_BUILTIN, HIGH);
       isOn1 = false;
     }
   }
 
-  //  tempDistance = sonic2();
-  //  if (tempDistance < distance && distance > 0) {
-  //    if (!isOn2) {
-  //      digitalWrite(LED_BUILTIN, LOW);
-  //      sendRequest(tempDistance);
-  //      isOn2 = true;
-  //    }
-  //  } else {
-  //    if (isOn2) {
-  //      digitalWrite(LED_BUILTIN, HIGH);
-  //      sendRequest(tempDistance);
-  //      isOn2 = false;
-  //    }
-  //  }
+  tempDistance = sonic2();
+  if (tempDistance < distance && distance > 0) {
+    if (!isOn2) {
+      digitalWrite(LED_BUILTIN, LOW);
+      sendRequest("http://192.168.1.4:8080/sonicDistance?distance=" + String(tempDistance) + "&mac=" + WiFi.macAddress());
+      isOn2 = true;
+    }
+  } else {
+    if (isOn2) {
+      digitalWrite(LED_BUILTIN, HIGH);
+      sendRequest("http://192.168.1.4:8080/sonicDistance?distance=" + String(tempDistance) + "&mac=" + WiFi.macAddress());
+      isOn2 = false;
+    }
+  }
 
   delay(delayTime);
 }

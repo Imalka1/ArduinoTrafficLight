@@ -1,8 +1,12 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 
-const char* ssid = "iDialog 4G - 2";
-const char* password = "149dialoghomewifi";
+//const char* ssid = "iDialog 4G - 2";
+//const char* password = "149dialoghomewifi";
+//const char* ssid = "PROLiNK_H5001N";
+//const char* password = "prolink123321";
+const char* ssid = "SLT-4G_372144";
+const char* password = "prolink12345";
 const int ledPin = 10;  //D4
 WiFiServer server(80);
 

@@ -9,9 +9,9 @@ public class NodemcuTable {
     private static ArrayList<Sensor> sensors = new ArrayList<>();
 
     public NodemcuTable() {
-        setSensor("sensor1", "seg1", "192.168.9.21", "errorFound");
-        setSensor("sensor2", "seg1", "192.168.9.22", "errorFound");
-        setSensor("sensor3", "seg1", "192.168.9.23", "errorFound");
+        setSensor("sensor1", "seg1", "192.168.1.21", "errorFound");
+        setSensor("sensor2", "seg1", "192.168.1.22", "errorFound");
+        setSensor("sensor3", "seg1", "192.168.1.23", "errorFound");
     }
 
     private void setSensor(String name, String segment, String ip, String error) {
@@ -26,9 +26,9 @@ public class NodemcuTable {
     public static String getIpOfLight(String light) {
         switch (light) {
             case "light1":
-                return "192.168.9.7";
+                return "192.168.1.7";
             case "light2":
-                return "192.168.9.8";
+                return "192.168.1.8";
             default:
                 return null;
         }
@@ -72,7 +72,7 @@ public class NodemcuTable {
     }
 
     public static int getDistance() {
-        return 28;
+        return 10;
     }
 
     public static int getDelayTime() {
