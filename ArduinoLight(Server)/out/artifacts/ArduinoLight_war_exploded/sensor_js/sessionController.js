@@ -17,23 +17,28 @@ webSoc.onmessage = function processMessage(message) {
         console.log(count)
         checkWifiSensorModules(dataSet.sensor, dataSet.segment)//Sensor & Segment
         if (count == 3) {
-            $.ajax(
-                {
-                    type: "post",
-                    url: "http://" + window.location.hostname + ":8080/setProperties",
-                    success: function (response) {
-
-                    },
-                    error: function () {
-
-                    }
-                }
-            );
+            $('#lightsText').text('All Sensors are ready')
         }
     } else if (dataSet.errorFound === "Not found") {
         setVehicleCount(dataSet.sensor, dataSet.segment, dataSet.curCount, dataSet.preCount)//Sensor & Segment & Cur_Value & Pre_Value
     }
 }
+
+$('#startBtn').click(function () {
+    $.ajax(
+        {
+            type: "post",
+            url: "http://" + window.location.hostname + ":8080/setProperties",
+            success: function (response) {
+                $('#systemText').text('System is started')
+                $('#systemText').css('color','green')
+            },
+            error: function () {
+
+            }
+        }
+    );
+})
 
 function setSegments(i, segment, spots) {
     $("#screenBody").append('' +

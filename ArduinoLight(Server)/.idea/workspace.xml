@@ -8,6 +8,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6df3e2bc-dcb6-4034-8ba5-d61eaa2f0411" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/WEB-INF/classes/controller/SonicSensor$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/WEB-INF/classes/controller/SonicSensor$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/WEB-INF/classes/controller/SonicSensor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/WEB-INF/classes/controller/SonicSensor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/sensor_js/sessionController.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ArduinoLight_war_exploded/sensor_js/sessionController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ArduinoLight/controller/SonicSensor$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ArduinoLight/controller/SonicSensor$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ArduinoLight/controller/SonicSensor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ArduinoLight/controller/SonicSensor.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -122,21 +128,24 @@
     <session id="1270690315">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="java" value="8" />
           <entry key="js" value="1" />
+          <entry key="jsp" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JAVA" value="8" />
+          <entry key="JSP" value="1" />
           <entry key="JavaScript" value="1" />
         </counts>
       </usages-collector>
@@ -159,13 +168,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/SonicSensor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1564">
+            <state relative-caret-position="1513">
               <caret line="103" column="25" selection-start-line="103" selection-start-column="25" selection-end-line="103" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/sensor_js/sessionController.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
@@ -197,6 +206,15 @@
                 <element signature="e#41#47#0" expanded="true" />
                 <element signature="e#47#53#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/index.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="232">
+              <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="51" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -271,7 +289,6 @@
         <option value="$PROJECT_DIR$/src/ServerEndPoint.java" />
         <option value="$PROJECT_DIR$/src/LoadProperties.java" />
         <option value="$PROJECT_DIR$/src/MacIpTable.java" />
-        <option value="$PROJECT_DIR$/web/index.jsp" />
         <option value="$PROJECT_DIR$/src/components/Light.java" />
         <option value="$PROJECT_DIR$/src/components/SensorsSet.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
@@ -284,6 +301,7 @@
         <option value="$PROJECT_DIR$/src/controller/SonicSensor.java" />
         <option value="$PROJECT_DIR$/web/sensor_js/sessionController.js" />
         <option value="$PROJECT_DIR$/src/mac_ip/NodemcuTable.java" />
+        <option value="$PROJECT_DIR$/web/index.jsp" />
       </list>
     </option>
   </component>
@@ -303,7 +321,7 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="1935" />
@@ -316,6 +334,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -403,7 +422,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -559,17 +577,18 @@
       <workItem from="1555526534582" duration="20000" />
       <workItem from="1556687566964" duration="7688000" />
       <workItem from="1556783357367" duration="641000" />
+      <workItem from="1556816131084" duration="144000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="219436000" />
+    <option name="totallyTimeSpent" value="219580000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10671141" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10805369" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -639,13 +658,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/new_browser_window/WifiStatus.java" />
-    <entry file="file://$PROJECT_DIR$/web/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Light.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -669,7 +681,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/SonicSensor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1564">
+        <state relative-caret-position="1513">
           <caret line="103" column="25" selection-start-line="103" selection-start-column="25" selection-end-line="103" selection-end-column="25" />
         </state>
       </provider>
@@ -743,6 +755,13 @@
             <element signature="e#41#47#0" expanded="true" />
             <element signature="e#47#53#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="51" selection-end-column="6" />
         </state>
       </provider>
     </entry>
