@@ -9,9 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.EncodeException;
 import javax.websocket.Session;
+import javax.xml.ws.Response;
 import java.io.*;
 import java.util.Set;
+import java.util.concurrent.Future;
 
 @WebServlet(urlPatterns = "/sonicDistance")
 public class SonicSensor extends HttpServlet {
@@ -24,21 +27,33 @@ public class SonicSensor extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("wifiStatus") != null) {
+            System.out.println("Fuck");
             Sensor sensor = NodemcuTable.getSensorViaMac(req.getParameter("mac"));
             sensor.setError("Not found(OK)");
             String message = "{\"sensor\":\"" + sensor.getName().substring(6) + "\",\"segment\":\"" + sensor.getSegment().substring(3) + "\",\"errorFound\":\"" + sensor.getError() + "\"}";
-            System.out.println(message);
+//            broadcast(message);
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        Thread.sleep(NodemcuTable.getDelayTime());
-                        broadcast(message);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    String tempMessage = message;
+                    System.out.println("A"+tempMessage);
+//                        Thread.sleep(1000);
+                    broadcast(tempMessage);
                 }
             }).start();
+//            Thread t=new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    System.out.println(message);
+//                        broadcast(message);
+//                }
+//            });
+//            try {
+//                t.join();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            t.start();
         } else {
             String distance = req.getParameter("distance");
 //            String mac = req.getParameter("mac");
@@ -67,8 +82,20 @@ public class SonicSensor extends HttpServlet {
                         sensor.setCount(sensor.getCount() - 1);
                     }
                     if (sensor.getCount() == 0) {
-                        lightSensorController.sendGetToLights(ip1, 0);
-                        System.out.println("LED=OFF");
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(1000);
+                                    lightSensorController.sendGetToLights(ip1, 0);
+                                    System.out.println("LED=OFF");
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).start();
                     }
                 }
                 if (ip2 != null) {
@@ -94,11 +121,12 @@ public class SonicSensor extends HttpServlet {
         }
     }
 
-    private static void broadcast(String msg) {
+    private synchronized void broadcast(String msg) {
         Set<Session> userSessions = ServerEndPoint.getUserSessions();
         for (Session session : userSessions) {
             session.getAsyncRemote().sendText(msg);
         }
+        System.out.println(msg);
     }
 
     public static String getVehicleCount() {
