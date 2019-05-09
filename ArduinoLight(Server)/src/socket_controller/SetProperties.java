@@ -29,7 +29,7 @@ public class SetProperties extends HttpServlet {
         }
         for (int i = 0; i < NodemcuTable.getSensorsCount(); i++) {
             try {
-                lightSensorController.setProperties(NodemcuTable.getSensors().get(i).getIp(), NodemcuTable.getDistance(), NodemcuTable.getDelayTime());
+                lightSensorController.setProperties(new NodemcuTable().getSensors().get(i).getIp(), NodemcuTable.getDistance(), NodemcuTable.getDelayTime());
             } catch (Exception e) {
                 e.printStackTrace();
             }

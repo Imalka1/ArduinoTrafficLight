@@ -50,7 +50,7 @@ public class NodemcuTable {
 //        }
 //    }
 
-    public static Sensor getSensorViaMac(String mac) {
+    public Sensor getSensorViaMac(String mac) {
         switch (mac) {
             case "80:7D:3A:3E:18:AB":
                 return sensors.get(0);

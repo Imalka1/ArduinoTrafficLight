@@ -12,7 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @ServerEndpoint("/light-end-point")
 public class ServerEndPoint {
 
-    private static Set<Session> userSessions = Collections.newSetFromMap(new ConcurrentHashMap<Session, Boolean>());
+    //    private static Set<Session> userSessions = Collections.newSetFromMap(new ConcurrentHashMap<Session, Boolean>());
+    private static Set<Session> userSessions = ConcurrentHashMap.newKeySet();
 
     @OnOpen
     public void onOpen(Session userSession) {
@@ -26,7 +27,10 @@ public class ServerEndPoint {
 
     @OnMessage
     public void onMessage(String message, Session userSession) {
-//        broadcast(message, userSession);
+//        Set<Session> userSessions = ServerEndPoint.getUserSessions();
+//        for (Session session : userSessions) {
+//            session.getAsyncRemote().sendText(message);
+//        }
 //        System.out.println(message);
     }
 

@@ -1,6 +1,6 @@
 package new_browser_window;
 
-import controller.SonicSensor;
+import service.SonicSensorOperator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +16,6 @@ public class LoadProperties extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/plain");
         PrintWriter writer = resp.getWriter();
-        writer.println(SonicSensor.getVehicleCount());
+        writer.println(new SonicSensorOperator().getVehicleCount());
     }
 }
